@@ -3,8 +3,8 @@ orbs:
   node: circleci/node@5.0.2
 jobs:
   build-and-test:
-    docker: 
-      -image: "cimg/base:stable"
+    docker:
+      - image: "cimg/base:stable"
     steps:
       - checkout
       - node/install:
