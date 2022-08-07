@@ -30,9 +30,13 @@ class ListMenuComponent extends Component {
     }
 
     deleteMenu(id) {
-        MenuService.deleteMenu(id).then((res => {
+        MenuService.deleteMenu(id)
+        .then((res => {
            this.setState({menus: this.state.menus.filter(menu => menu.id !== id)});
-        }));
+        }))
+        .catch((error) => {
+            console.log('Error', error.message);
+        });
     }
 
     render() {

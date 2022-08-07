@@ -5,6 +5,7 @@ import ListMenuComponent from './components/ListMenuComponent';
 import HeaderComponent from './components/HeaderComponent';
 import FooterComponent from './components/FooterComponent';
 import CreateMenuComponent from './components/CreateMenuComponent';
+import Login from './components/Login';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Routes> 
             <Route path="/" exact element = {<ListMenuComponent/>}> </Route>
             <Route path="/add/:id" element = {<CreateMenuComponent/>}></Route>
+            <Route path='/login' exact element= {<Login/>}></Route>
           </Routes>
         </div>
         <FooterComponent/>

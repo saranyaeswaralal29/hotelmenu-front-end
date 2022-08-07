@@ -9,7 +9,7 @@ class MenuService {
     }
 
     createMenu(menu) {
-        return axios.post(MENU_API_BASE_URL, menu);
+        return axios.post(MENU_API_BASE_URL+'/admin', menu);
     }
 
     getMenuById(menuId) {
@@ -17,11 +17,11 @@ class MenuService {
     }
 
     updateMenu(menuId, menu) {
-        return axios.put(MENU_API_BASE_URL+'/'+menuId,menu);
+        return axios.put(MENU_API_BASE_URL+'/admin/'+menuId,menu);
     }
 
     deleteMenu(menuId) {
-        return axios.delete(MENU_API_BASE_URL+'/'+menuId);
+        return axios.delete(MENU_API_BASE_URL+'/admin/'+menuId);
     }
 }
 
