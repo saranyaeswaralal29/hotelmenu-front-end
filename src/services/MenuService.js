@@ -18,7 +18,7 @@ class MenuService {
                 Accept: '*/*',
                 "Access-Control-Allow-Origin": "*",
                 "Content-Type": "application/x-www-form-urlencoded",
-                withCredentials: false,
+                withCredentials: true,
                 Authorization: `Bearer ${localStorage.getItem("authToken")}`
             }
         });
