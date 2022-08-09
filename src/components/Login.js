@@ -1,15 +1,19 @@
-import React, { Component, useState }  from 'react';
+import React, { Component}  from 'react';
 import {WithRouter} from '../components/WithRouter';
 import LoginService from '../services/LoginService';
 
+
 class Login extends Component {
-    
+   
     constructor(props) {
+
         super(props);
         
         this.state = {
+            
             userName : '',
             password: ''
+
         }
 
         this.changeNameHandler = this.changeNameHandler.bind(this);
@@ -31,20 +35,27 @@ class Login extends Component {
         console.log("login credentials =>"  + JSON.stringify(loginCredentials));
             LoginService.loginApi(loginCredentials).then(res => {
                 // set the token and user from the session storage
-                    sessionStorage.setItem('token', res.data.accessToken);
-                    sessionStorage.setItem('username', JSON.stringify(res.data.username));
-                    console.log(res.data.accessToken);
-                this.props.navigate('/')
+                    localStorage.setItem('authToken', res.data.accessToken);
+                    localStorage.setItem('username', JSON.stringify(res.data.username));
+                    console.log(localStorage.getItem('authToken'));
+                    this.props.navigate('/')
+                    window.location.reload();
             })
             .catch(error => {
                 console.log(error);
             });
     }
 
+    cancel = (e) => {
+        this.props.navigate('/')
+    }
+
     render() {
         return (
-            <div>
-                Login <br/> <br/>
+            <div className='container'>
+                <div className='row'>
+                        <div className='card col-md-6 offset-md-3 offset-md-3'>
+                <br/> <br/>
                 <div className='card-body'>
                 <form>
 
@@ -62,8 +73,11 @@ class Login extends Component {
                     </div>
                     <div className='form-group'>
                         <button className='btn btn-success' onClick={this.loginHandle}>Login</button>
+                        <button className='btn btn-danger' onClick={this.cancel} style={{marginLeft: "10px"}}>Cancel</button>
                     </div>
                 </form>
+                </div>
+                </div>
                 </div>
             </div>
             

@@ -11,7 +11,7 @@ function App() {
   return (
     <div>
       <Router>
-        <HeaderComponent/>
+      <HeaderComponent/>
         <div className="container">
           <Routes> 
             <Route path="/" exact element = {<ListMenuComponent/>}> </Route>
@@ -19,8 +19,9 @@ function App() {
             <Route path='/login' exact element= {<Login/>}></Route>
           </Routes>
         </div>
-        <FooterComponent/>
+        <FooterComponent/>  
       </Router>
+     
     </div>
   );
 }

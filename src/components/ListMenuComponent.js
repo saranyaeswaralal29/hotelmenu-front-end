@@ -1,4 +1,3 @@
-import { toHaveDisplayValue } from '@testing-library/jest-dom/dist/matchers';
 import React, { Component } from 'react';
 import {WithRouter} from '../components/WithRouter';
 import MenuService from '../services/MenuService';
@@ -8,7 +7,10 @@ class ListMenuComponent extends Component {
         super(props)
 
         this.state = {
-            menus : []
+            menus : [],
+            quantity: '',
+            MasterChecked: false,
+            SelectedList: []
         }
         this.addMenu = this.addMenu.bind(this);
         this.editMenu = this.editMenu.bind(this);
@@ -19,6 +21,7 @@ class ListMenuComponent extends Component {
         MenuService.getMenus().then((res => {
             this.setState({menus : res.data});
         }));
+        console.log(localStorage.getItem('username'));
     }
 
     addMenu(){
@@ -39,22 +42,38 @@ class ListMenuComponent extends Component {
         });
     }
 
+    
+
     render() {
         
         return (
             <div>
                 <h2 className="text-center">Menu List</h2>
+                <h2>Welcome {localStorage.getItem('username') != null 
+                ? localStorage.getItem('username')
+                : 'Guest' }</h2>
                 <div>
+                { localStorage.getItem('username') == null ? null :
                     <button className="btn btn-primary" onClick={this.addMenu}>Add Menu</button>
+                }
                 </div>
-                <div className="row">
-                    <table className="table table-striped table-bordered">
+                <div className="row" style={{overflow: 'auto'}}>
+                    <table className="table table-striped table-bordered" >
                         <thead>
                             <tr>
                                 <th> Menu Category</th>
                                 <th> Item Name</th>
                                 <th> Price</th>
-                                <th> Actions </th>
+                                { localStorage.getItem('username') != null
+                                        ? <th> Actions </th>
+                                : <th scope="row">
+                                    <input
+                                        type="checkbox"
+                                        className="form-check-input"
+                                        id="mastercheck"
+                                    />
+                                    </th>
+                                }
                             </tr>
                         </thead>
 
@@ -63,14 +82,24 @@ class ListMenuComponent extends Component {
                                 this.state.menus.map (
                                     menu => 
                                     <tr key = { menu.id}>
+                                        
                                         <td>{menu.categoryName}</td>
                                         <td>{menu.itemName}</td>
                                         <td>{menu.price}</td>
-                                        <td>
-                                            <button onClick={() => this.editMenu(menu.id)} className="btn btn-info">Update</button>
-                                           
+                                        { localStorage.getItem('username') != null
+                                        ?
+                                        <td> 
+                                            <button onClick={() => this.editMenu(menu.id)} className="btn btn-info" >Update</button>
                                             <button style={{marginLeft:"10px"}} onClick={() => this.deleteMenu(menu.id)} className="btn btn-danger">Delete</button>
                                         </td>
+                                        :
+                                        <td><input
+                                        type="checkbox"
+                                        className="form-check-input"
+                                        id="rowcheck{menu.id}"/>
+                                        </td>
+                                        }
+                                        
                                     </tr>
                                 )
                             }

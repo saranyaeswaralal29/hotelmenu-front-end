@@ -13,7 +13,16 @@ class MenuService {
     }
 
     getMenuById(menuId) {
-        return axios.get(MENU_API_BASE_URL+'/'+menuId);
+        let authHeader = axios.create({
+            headers: {
+                Accept: '*/*',
+                "Access-Control-Allow-Origin": "*",
+                "Content-Type": "application/x-www-form-urlencoded",
+                withCredentials: false,
+                Authorization: `Bearer ${localStorage.getItem("authToken")}`
+            }
+        });
+       return authHeader.get(MENU_API_BASE_URL+'/'+menuId);
     }
 
     updateMenu(menuId, menu) {

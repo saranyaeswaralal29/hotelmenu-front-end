@@ -86,13 +86,24 @@ class CreateMenuComponent extends Component {
                                 <form>
                                     <div className='form-group'>
                                         <label>Category Name  :</label>
-                                        <input placeholder='Category Name' name="categoryName" className='form-control'
-                                            value={this.state.categoryName} onChange={this.changeCategoryHandler}/>
+                                        {
+                                        this.state.id == -1
+                                        ? <input placeholder='Category Name' name="categoryName" className='form-control'
+                                            value={this.state.categoryName} onChange={this.changeCategoryHandler} />
+                                        : <input placeholder='Category Name' name="categoryName" className='form-control'
+                                        value={this.state.categoryName} onChange={this.changeCategoryHandler} readOnly/>
+                                        }
                                             </div>
                                             <div className='form-group'>
                                         <label>Item Name  :</label>
+                                        {
+                                        this.state.id == -1
+                                        ?
                                         <input placeholder='Item Name' name="itemName" className='form-control'
-                                            value={this.state.itemName} onChange={this.changeItemHandler}/>    
+                                            value={this.state.itemName} onChange={this.changeItemHandler}/>  
+                                        : <input placeholder='Item Name' name="itemName" className='form-control'
+                                        value={this.state.itemName} onChange={this.changeItemHandler} readOnly/>
+                                        }  
                                             </div>
                                         <div className='form-group'>
                                         <label>Price :</label>
