@@ -20,4 +20,7 @@ afterAll(() => server.close());
 
 test('renders default view in screen', () => {
   render(<App />);
+
+  expect(screen.getByText("Hotel Menu Application")).toBeInTheDocument();
+  expect(screen.getByText("Menu List")).toBeInTheDocument();
 });
