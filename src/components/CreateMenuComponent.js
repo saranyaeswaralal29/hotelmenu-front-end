@@ -30,6 +30,9 @@ class CreateMenuComponent extends Component {
                     itemName: menu.itemName,
                     price: menu.price
                 });
+            })
+            .catch(error => {
+                console.log(error);
             });
         } 
     }
@@ -53,10 +56,16 @@ class CreateMenuComponent extends Component {
         if (this.state.id == -1) {
             MenuService.createMenu(menu).then(res => {
                 this.props.navigate('/')
+            })
+            .catch(error => {
+                console.log(error);
             });
         } else {
             MenuService.updateMenu(this.state.id,menu).then(res => {
                 this.props.navigate('/')
+            })
+            .catch(error => {
+                console.log(error);
             });
         }
     }

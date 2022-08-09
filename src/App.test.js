@@ -1,26 +1,22 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen,cleanup,fireEvent } from '@testing-library/react';
 import App from './App';
-import { rest } from 'msw';
-import { setupServer } from 'msw/node';
+import ListMenuComponent from './components/ListMenuComponent';
 
-const allMenus = [
-  { id: 1, categoryName: 'BreakFast', itemName:'Dosa', price:40 }, 
-  { id: 2,  categoryName: 'BreakFast', itemName:'Poori', price:60 }, 
-  { id: 3,  categoryName: 'BreakFast', itemName:'Pongal', price:50 }
-];
-
-const server = setupServer(
-  rest.get('/', (req, res, ctx) => {
-    return res(ctx.json({ recipes: allMenus }));
-  })
-);
-
-beforeAll(() => server.listen());
-afterAll(() => server.close());
+afterEach(cleanup);
 
 test('renders default view in screen', () => {
   render(<App />);
 
   expect(screen.getByText("Hotel Menu Application")).toBeInTheDocument();
+  expect(screen.getByText(/Log/i).textContent).toBe("Login");
   expect(screen.getByText("Menu List")).toBeInTheDocument();
+});
+
+test('navigate to login page on Login button click', ()=> {
+  render(<App/>);
+
+  expect(screen.getByText(/Log/i).textContent).toBe("Login");
+  fireEvent.click(screen.getByText("Login"));
+
+  expect(screen.getByText(/User/i).textContent).toBe("Username :");
 });

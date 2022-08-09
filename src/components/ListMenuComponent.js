@@ -20,7 +20,10 @@ class ListMenuComponent extends Component {
     componentDidMount() {
         MenuService.getMenus().then((res => {
             this.setState({menus : res.data});
-        }));
+        }))
+        .catch(error => {
+            
+        });
         console.log(localStorage.getItem('username'));
     }
 

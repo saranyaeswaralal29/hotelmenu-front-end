@@ -60,13 +60,13 @@ class Login extends Component {
                 <form>
 
                     <div className='form-group'>
-                    <label>Username  :</label>
+                    <label>Username :</label>
                     <input placeholder='Username' name="userName" className='form-control'
                                             value={this.state.userName} onChange={this.changeNameHandler}/>
 
                     </div>
                     <div className='form-group'>
-                    <label>Password  :</label>
+                    <label>Password :</label>
                     <input placeholder='password' name="password" className='form-control'
                                             value={this.state.password} onChange={this.changePasswordHandler}/>
 
