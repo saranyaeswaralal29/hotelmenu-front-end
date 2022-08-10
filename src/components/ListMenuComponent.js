@@ -8,14 +8,17 @@ class ListMenuComponent extends Component {
 
         this.state = {
             menus : [],
+            searchMenus : [],
             quantity: '',
             MasterChecked: false,
             SelectedList: [],
-            errorMessage: ''
+            errorMessage: '',
+            searchText:''
         }
         this.addMenu = this.addMenu.bind(this);
         this.editMenu = this.editMenu.bind(this);
         this.deleteMenu = this.deleteMenu.bind(this);
+        this.changeSearchHandler = this.changeSearchHandler.bind(this);
     }
 
     componentDidMount() {
@@ -25,6 +28,21 @@ class ListMenuComponent extends Component {
         .catch(error => {
             this.setState({errorMessage:error.response.data.errorMessage});
         });
+    }
+
+    changeSearchHandler = (event) => {
+        this.setState({searchText: event.target.value});
+        if (event.target.value.length > 0) {
+            MenuService.getMenus().then((res => {
+                this.setState({searchMenus : res.data});
+                this.setState({menus:this.state.searchMenus.filter(matchMenu => 
+                    matchMenu.categoryName === this.state.searchText
+                   )
+                });
+                this.setState({errorMessage:''});
+            }));
+        }
+        
     }
 
     addMenu(){
@@ -59,12 +77,15 @@ class ListMenuComponent extends Component {
                 <div>
                 { localStorage.getItem('username') == null ? null :
                     <button className="btn btn-primary" onClick={this.addMenu}>Add Menu</button>
-                }
+                }<p></p>
+                <input type="text" placeholder='Search By Category' className='float-right'
+                                            value={this.state.searchText} onChange={this.changeSearchHandler}/>
                 </div>
                 <div className="row" style={{overflow: 'auto'}}>
                 {this.state.errorMessage && (
   <p className="error"> {this.state.errorMessage} </p>
 )}
+
                     <table className="table table-striped table-bordered" >
                         <thead>
                             <tr>
