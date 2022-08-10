@@ -9,7 +9,16 @@ class MenuService {
     }
 
     createMenu(menu) {
-        return axios.post(MENU_API_BASE_URL+'/admin', menu);
+        let authHeader = axios.create({
+            headers: {
+                Accept: '*/*',
+                "Access-Control-Allow-Origin": "*",
+                "Content-Type": "application/json",
+                withCredentials: true,
+                Authorization: `Bearer ${localStorage.getItem("authToken")}`
+            }
+        });
+        return authHeader   .post(MENU_API_BASE_URL+'/admin', menu);
     }
 
     getMenuById(menuId) {
@@ -26,11 +35,29 @@ class MenuService {
     }
 
     updateMenu(menuId, menu) {
-        return axios.put(MENU_API_BASE_URL+'/admin/'+menuId,menu);
+        let authHeader = axios.create({
+            headers: {
+                Accept: '*/*',
+                "Access-Control-Allow-Origin": "*",
+                "Content-Type": "application/json",
+                withCredentials: true,
+                Authorization: `Bearer ${localStorage.getItem("authToken")}`
+            }
+        });
+        return authHeader.put(MENU_API_BASE_URL+'/admin/'+menuId,menu);
     }
 
     deleteMenu(menuId) {
-        return axios.delete(MENU_API_BASE_URL+'/admin/'+menuId);
+        let authHeader = axios.create({
+            headers: {
+                Accept: '*/*',
+                "Access-Control-Allow-Origin": "*",
+                "Content-Type": "application/json",
+                withCredentials: true,
+                Authorization: `Bearer ${localStorage.getItem("authToken")}`
+            }
+        });
+        return authHeader.delete(MENU_API_BASE_URL+'/admin/'+menuId);
     }
 }
 

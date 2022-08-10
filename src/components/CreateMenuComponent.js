@@ -11,7 +11,8 @@ class CreateMenuComponent extends Component {
             categoryName: '',
             itemName:'',
             price:'',
-            errorMessage: ''
+            errorMessage: '',
+            MasterChecked: false
         }
 
         this.changeCategoryHandler = this.changeCategoryHandler.bind(this);
@@ -83,6 +84,7 @@ class CreateMenuComponent extends Component {
     cancel = (e) => {
         this.props.navigate('/')
     }
+
     render() {
         return (
             <div>
