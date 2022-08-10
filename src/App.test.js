@@ -19,4 +19,5 @@ test('navigate to login page on Login button click', ()=> {
   fireEvent.click(screen.getByText("Login"));
 
   expect(screen.getByText(/User/i).textContent).toBe("Username :");
+  expect(screen.getByText(/Pass/i).textContent).toBe("Password :");
 });

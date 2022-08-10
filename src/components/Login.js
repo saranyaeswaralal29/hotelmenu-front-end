@@ -6,13 +6,14 @@ import LoginService from '../services/LoginService';
 class Login extends Component {
    
     constructor(props) {
-
+    
         super(props);
         
         this.state = {
             
             userName : '',
-            password: ''
+            password: '',
+            errorMessage: ''
 
         }
 
@@ -36,13 +37,13 @@ class Login extends Component {
             LoginService.loginApi(loginCredentials).then(res => {
                 // set the token and user from the session storage
                     localStorage.setItem('authToken', res.data.accessToken);
-                    localStorage.setItem('username', JSON.stringify(res.data.username));
-                    console.log(localStorage.getItem('authToken'));
+                    localStorage.setItem('username', res.data.username);
                     this.props.navigate('/')
                     window.location.reload();
             })
             .catch(error => {
-                console.log(error);
+                console.log(error.response.data.error);
+                this.setState({errorMessage:error.response.data.error});
             });
     }
 
@@ -56,9 +57,12 @@ class Login extends Component {
                 <div className='row'>
                         <div className='card col-md-6 offset-md-3 offset-md-3'>
                 <br/> <br/>
+
                 <div className='card-body'>
                 <form>
-
+                {this.state.errorMessage && (
+  <p className="error"> {this.state.errorMessage} </p>
+)}
                     <div className='form-group'>
                     <label>Username :</label>
                     <input placeholder='Username' name="userName" className='form-control'

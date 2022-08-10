@@ -10,7 +10,8 @@ class CreateMenuComponent extends Component {
             id : this.props.params.id,
             categoryName: '',
             itemName:'',
-            price:''
+            price:'',
+            errorMessage: ''
         }
 
         this.changeCategoryHandler = this.changeCategoryHandler.bind(this);
@@ -33,6 +34,7 @@ class CreateMenuComponent extends Component {
             })
             .catch(error => {
                 console.log(error);
+                this.setState({errorMessage:error.response.data.errorMessage});
             });
         } 
     }
@@ -58,14 +60,14 @@ class CreateMenuComponent extends Component {
                 this.props.navigate('/')
             })
             .catch(error => {
-                console.log(error);
+                this.setState({errorMessage:error.response.data.errorMessage});
             });
         } else {
             MenuService.updateMenu(this.state.id,menu).then(res => {
                 this.props.navigate('/')
             })
             .catch(error => {
-                console.log(error);
+                this.setState({errorMessage:error.response.data.errorMessage});
             });
         }
     }
@@ -93,6 +95,9 @@ class CreateMenuComponent extends Component {
                             }
                             <div className='card-body'>
                                 <form>
+                                {this.state.errorMessage && (
+  <p className="error"> {this.state.errorMessage} </p>
+)}
                                     <div className='form-group'>
                                         <label>Category Name  :</label>
                                         {
