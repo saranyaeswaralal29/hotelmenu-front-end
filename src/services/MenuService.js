@@ -18,7 +18,7 @@ class MenuService {
                 Authorization: `Bearer ${localStorage.getItem("authToken")}`
             }
         });
-        return authHeader   .post(MENU_API_BASE_URL+'/admin', menu);
+        return authHeader.post(MENU_API_BASE_URL+'/admin', menu);
     }
 
     getMenuById(menuId) {
