@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import MenuService from '../services/MenuService';
+import OrderService from '../services/OrderService';
 import { WithRouter } from './WithRouter';
 
 class OrderDetailsComponent extends Component {
@@ -12,12 +13,14 @@ class OrderDetailsComponent extends Component {
             orderItems: [],
             cartItems: new Map(Object.entries(jsonObject)),
             errorMessage: '',
-            username:'',
+            firstName:'',
+            lastName:'',
             emailId: ''
         }
         this.computeTotal = this.computeTotal.bind(this);
         this.placeOrder = this.placeOrder.bind(this);
-        this.changeUserNameHandler = this.changeUserNameHandler.bind(this);
+        this.changeFirstNameHandler = this.changeFirstNameHandler.bind(this);
+        this.changeLastNameHandler = this.changeLastNameHandler.bind(this);
         this.changeEmailHandler = this.changeEmailHandler.bind(this);
     }
 
@@ -45,8 +48,12 @@ class OrderDetailsComponent extends Component {
         return orderTotal;
     }
 
-    changeUserNameHandler = (event) => {
-        this.setState({username: event.target.value});
+    changeFirstNameHandler = (event) => {
+        this.setState({firstName: event.target.value});
+    }
+
+    changeLastNameHandler = (event) => {
+        this.setState({lastName: event.target.value});
     }
 
     changeEmailHandler = (event) => {
@@ -54,9 +61,19 @@ class OrderDetailsComponent extends Component {
     }
 
     placeOrder() {
-        let orderDetails = {username:this.state.username, emailId: this.state.emailId,
-        totalPrice: this.computeTotal(), orderItems: this.state.orderItems};
+        let finalItems = [];
+        this.state.orderItems.forEach(menu => { 
+            menu['quantity']=this.state.cartItems.get(String(menu.id))
+            finalItems.push(menu);
+        });
+        console.log(finalItems);
+        let orderDetails = {user:{firstName: this.state.firstName,lastName:this.state.lastName,email:this.state.emailId},
+        totalPrice: this.computeTotal(), items: finalItems};
         console.log(orderDetails);
+
+        OrderService.createOrder(orderDetails).then((res => {
+            console.log(res.data);
+        }));
     }
 
     render() {
@@ -101,9 +118,15 @@ class OrderDetailsComponent extends Component {
                     <table>
                         <tbody>
                             <tr>
-                                <td><label>Please Enter User Name</label></td>
-                                <td><input type="text" className="form-group col-md-12" placeholder='User Name'
-                                value={this.state.username} onChange={this.changeUserNameHandler}/></td>
+                                <td><label>Please Enter First Name</label></td>
+                                <td><input type="text" className="form-group col-md-12" placeholder='First Name'
+                                value={this.state.firstName} onChange={this.changeFirstNameHandler}/></td>
+                                
+                            </tr>
+                            <tr>
+                                <td><label>Please Enter Last Name</label></td>
+                                <td><input type="text" className="form-group col-md-12" placeholder='Last Name'
+                                value={this.state.lastName} onChange={this.changeLastNameHandler}/></td>
                                 
                             </tr>
                             <tr>
