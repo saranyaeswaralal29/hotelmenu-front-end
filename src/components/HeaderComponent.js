@@ -24,7 +24,7 @@ class HeaderComponent extends Component {
                 <header>
                     <nav className="navbar navbar-expand-md navbar-dark bg-dark">
                         <div>
-                            <a className="navbar-brand">Taste Now....</a>
+                            <a className="navbar-brand" href='/'>Taste Now....</a>
                             { localStorage.getItem('username') === null
                                 ? <NavLink to="/login" className="btn btn-info">Login</NavLink>
                                 : <NavLink to="/" onClick={this.logoutHandle} className="btn btn-info">Log out</NavLink>

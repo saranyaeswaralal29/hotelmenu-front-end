@@ -62,18 +62,26 @@ class OrderDetailsComponent extends Component {
 
     placeOrder() {
         let finalItems = [];
+        let finalPrice  = this.computeTotal();
         this.state.orderItems.forEach(menu => { 
             menu['quantity']=this.state.cartItems.get(String(menu.id))
+            delete menu.id;
             finalItems.push(menu);
         });
         console.log(finalItems);
         let orderDetails = {user:{firstName: this.state.firstName,lastName:this.state.lastName,email:this.state.emailId},
-        totalPrice: this.computeTotal(), items: finalItems};
+        price: finalPrice, items: finalItems,  status:"new"};
         console.log(orderDetails);
 
-        OrderService.createOrder(orderDetails).then((res => {
+        OrderService.createOrder(orderDetails)
+        .then((res => {
             console.log(res.data);
-        }));
+            alert("Thank you. Your order (Id:"+res.data.id+") will be delivered soon.");
+            this.props.navigate('/');
+        }))
+        .catch(error  => {
+            this.setState({errorMessage:error.response.data.errorMessage});
+        });
     }
 
     render() {
