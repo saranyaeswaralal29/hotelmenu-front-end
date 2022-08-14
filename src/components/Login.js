@@ -42,8 +42,18 @@ class Login extends Component {
                     window.location.reload();
             })
             .catch(error => {
-                console.log(error.response.data.error);
-                this.setState({errorMessage:error.response.data.error});
+                console.log(error.response.data);
+                let messages = [];
+                messages = error.response.data;
+                if(messages.username  !== undefined && messages.password !== undefined) {
+                    this.setState({errorMessage: messages.username + ", " + messages.password});
+                } else if (messages.username  !== undefined) {
+                    this.setState({errorMessage: messages.username});
+                } else if (messages.password !== undefined) {
+                    this.setState({errorMessage: messages.password});
+                } else {
+                    this.setState({errorMessage: messages.errorMessage});
+                }
             });
     }
 

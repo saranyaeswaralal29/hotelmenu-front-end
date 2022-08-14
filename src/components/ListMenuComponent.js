@@ -41,6 +41,9 @@ class ListMenuComponent extends Component {
                    )
                 });
                 this.setState({errorMessage:''});
+            })
+            .catch(error => {
+                this.setState({errorMessage:error.response.data.errorMessage});
             }));
         }
         
