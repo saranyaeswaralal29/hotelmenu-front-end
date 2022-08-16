@@ -1,23 +1,33 @@
-import { render, screen,cleanup,fireEvent } from '@testing-library/react';
+import { render, screen,cleanup,waitFor } from '@testing-library/react';
 import App from './App';
-import ListMenuComponent from './components/ListMenuComponent';
+import axiosMock from "axios";
+import { act } from "react-dom/test-utils";
 
+
+jest.mock('axios');
 afterEach(cleanup);
 
-test('renders default view in screen', () => {
-  render(<App />);
+test('renders default view in screen', async () => {
+  axiosMock.get.mockResolvedValue({data: { id:1,categoryName:'Breakfast',itemName:'Idly',price:50 } })
+  const url = 'http://localhost:8080';
+  
+  await waitFor(() => {
+    render(<App />);
+  });
 
   expect(screen.getByText("Taste Now....")).toBeInTheDocument();
-  expect(screen.getByText(/Log/i).textContent).toBe("Login");
-  expect(screen.getByText("Menu List")).toBeInTheDocument();
+  expect(screen.getAllByRole("button")).toBeTruthy();
+  expect(screen.getByText("All Rights Reserved 2022")).toBeInTheDocument();
 });
 
-test('navigate to login page on Login button click', ()=> {
-  render(<App/>);
+test('get all menus from the system', async () => { 
+  axiosMock.get.mockResolvedValue({data: { id:1,categoryName:'Breakfast',itemName:'Idly',price:50 } })
+  const url = 'http://localhost:8080';
 
-  expect(screen.getByText(/Log/i).textContent).toBe("Login");
-  fireEvent.click(screen.getByText("Login"));
+  await waitFor(() => {
+    render(<App />);
+  });
 
-  expect(screen.getByText(/User/i).textContent).toBe("Username :");
-  expect(screen.getByText(/Pass/i).textContent).toBe("Password :");
-});
+  expect(axiosMock.get).toHaveBeenCalledTimes(1);
+  expect(axiosMock.get).toHaveBeenCalledWith(url);
+})
