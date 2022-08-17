@@ -86,7 +86,7 @@ class Login extends Component {
 
                     </div>
                     <div className='form-group'>
-                        <button className='btn btn-success' onClick={this.loginHandle}>Login</button>
+                        <button className='btn btn-success' data-testid="appLogin" onClick={this.loginHandle}>Login</button>
                         <button className='btn btn-danger' onClick={this.cancel} style={{marginLeft: "10px"}}>Cancel</button>
                     </div>
                 </form>
