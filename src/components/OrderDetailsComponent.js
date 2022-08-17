@@ -89,11 +89,11 @@ class OrderDetailsComponent extends Component {
             <div>
                 <h2>Preview Order</h2>
                 <div className="row" style={{overflow: 'auto'}}>
-                {this.state.errorMessage && (
-                    <p className="error" style={{color:"red"}}> {this.state.errorMessage} </p>
+                    {
+                        this.state.errorMessage && (
+                        <p className="error" style={{color:"red"}}> {this.state.errorMessage} </p>
                     )}
                     <table className="table table-striped table-bordered" >
-
                         <thead>
                             <tr>
                                 <th>Item Name</th>
@@ -113,38 +113,34 @@ class OrderDetailsComponent extends Component {
                                         <td>{this.state.cartItems.get(String(menu.id))*menu.price}</td>
                                     </tr> 
                                 )
-                                }
+                            }
                                 <tr>
                                     <td></td><td></td>
                                     <td>Total Price</td><td>{this.computeTotal()}</td>
                                 </tr>
-                                
                         </tbody>
-
                     </table>
-                    </div>
-                    <table>
-                        <tbody>
-                            <tr>
-                                <td><label>Please Enter First Name</label></td>
-                                <td><input type="text" className="form-group col-md-12" placeholder='First Name'
-                                value={this.state.firstName} onChange={this.changeFirstNameHandler}/></td>
-                                
-                            </tr>
-                            <tr>
-                                <td><label>Please Enter Last Name</label></td>
-                                <td><input type="text" className="form-group col-md-12" placeholder='Last Name'
-                                value={this.state.lastName} onChange={this.changeLastNameHandler}/></td>
-                                
-                            </tr>
-                            <tr>
+                </div>
+                <table>
+                    <tbody>
+                        <tr>
+                            <td><label>Please Enter First Name</label></td>
+                            <td><input type="text" className="form-group col-md-12" placeholder='First Name'
+                                value={this.state.firstName} onChange={this.changeFirstNameHandler}/></td>    
+                        </tr>
+                        <tr>
+                            <td><label>Please Enter Last Name</label></td>
+                            <td><input type="text" className="form-group col-md-12" placeholder='Last Name'
+                                value={this.state.lastName} onChange={this.changeLastNameHandler}/></td>  
+                        </tr>
+                        <tr>
                             <td><label>Please Enter Email</label></td>
-                                <td><input type="email" className="form-group col-md-12" placeholder='Email Id'
+                            <td><input type="email" className="form-group col-md-12" placeholder='Email Id'
                                 value={this.state.emailId} onChange={this.changeEmailHandler}/></td>
-                            </tr>
+                        </tr>
                     </tbody>
-                    </table>
-                    <button className="btn btn-primary" onClick={this.placeOrder}>Place Order</button>
+                </table>
+                <button className="btn btn-primary" onClick={this.placeOrder}>Place Order</button>
             </div>
         );
     }

@@ -11,18 +11,17 @@ function App() {
   return (
     <div>
       <Router>
-      <HeaderComponent/>
-        <div className="container">
-          <Routes> 
-            <Route path="/" exact element = {<ListMenuComponent/>}> </Route>
-            <Route path="/add/:id" element = {<CreateMenuComponent/>}></Route>
-            <Route path='/login' exact element= {<Login/>}></Route>
-            <Route path='/previewOrder' element={<OrderDetailsComponent/>}></Route>
-          </Routes>
-        </div>
-        <FooterComponent/>  
+        <HeaderComponent/>
+          <div className="container">
+            <Routes> 
+              <Route path="/" exact element = {<ListMenuComponent/>}> </Route>
+              <Route path="/add/:id" element = {<CreateMenuComponent/>}></Route>
+              <Route path='/login' exact element= {<Login/>}></Route>
+              <Route path='/previewOrder' element={<OrderDetailsComponent/>}></Route>
+            </Routes>
+          </div>
+          <FooterComponent/>  
       </Router>
-     
     </div>
   );
 }

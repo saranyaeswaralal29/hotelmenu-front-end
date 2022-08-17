@@ -87,7 +87,6 @@ class CreateMenuComponent extends Component {
     render() {
         return (
             <div>
-                
                 <div className='container'>
                     <div className='row'>
                         <div className='card col-md-6 offset-md-3 offset-md-3'>
@@ -96,45 +95,43 @@ class CreateMenuComponent extends Component {
                             }
                             <div className='card-body'>
                                 <form>
-                                {this.state.errorMessage && (
-  <p className="error"> {this.state.errorMessage} </p>
-)}
+                                    {this.state.errorMessage && (
+                                        <p className="error"> {this.state.errorMessage} </p>
+                                    )}
                                     <div className='form-group'>
                                         <label>Category Name  :</label>
                                         {
-                                        this.state.id === -1
-                                        ? <input placeholder='Category Name' name="categoryName" className='form-control'
-                                            value={this.state.categoryName} onChange={this.changeCategoryHandler} />
-                                        : <input placeholder='Category Name' name="categoryName" className='form-control'
-                                        value={this.state.categoryName} onChange={this.changeCategoryHandler} readOnly/>
+                                            this.state.id === -1
+                                            ? <input placeholder='Category Name' name="categoryName" className='form-control'
+                                                value={this.state.categoryName} onChange={this.changeCategoryHandler} />
+                                            : <input placeholder='Category Name' name="categoryName" className='form-control'
+                                            value={this.state.categoryName} onChange={this.changeCategoryHandler} readOnly/>
                                         }
-                                            </div>
-                                            <div className='form-group'>
+                                    </div>
+                                    <div className='form-group'>
                                         <label>Item Name  :</label>
                                         {
-                                        this.state.id === -1
-                                        ?
-                                        <input placeholder='Item Name' name="itemName" className='form-control'
-                                            value={this.state.itemName} onChange={this.changeItemHandler}/>  
-                                        : <input placeholder='Item Name' name="itemName" className='form-control'
-                                        value={this.state.itemName} onChange={this.changeItemHandler} readOnly/>
+                                            this.state.id === -1
+                                            ?
+                                            <input placeholder='Item Name' name="itemName" className='form-control'
+                                                value={this.state.itemName} onChange={this.changeItemHandler}/>  
+                                            : <input placeholder='Item Name' name="itemName" className='form-control'
+                                                value={this.state.itemName} onChange={this.changeItemHandler} readOnly/>
                                         }  
-                                            </div>
-                                        <div className='form-group'>
+                                    </div>
+                                    <div className='form-group'>
                                         <label>Price :</label>
                                         <input placeholder='Price' name="price" className='form-control'
                                             value={this.state.price} onChange={this.changePriceHandler}/>    
-
                                     </div>
                                     <div className='form-group'>
-                                    <button className='btn btn-success' onClick={this.saveMenu}>Save</button>
-                                    <button className='btn btn-danger' onClick={this.cancel} style={{marginLeft: "10px"}}>Cancel</button>
+                                        <button className='btn btn-success' onClick={this.saveMenu}>Save</button>
+                                        <button className='btn btn-danger' onClick={this.cancel} style={{marginLeft: "10px"}}>Cancel</button>
                                     </div>
                                 </form>
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
         );
