@@ -22,7 +22,8 @@ class CreateMenuComponent extends Component {
     }
 
     componentDidMount() {
-        if (this.state.id === -1)  {
+        console.log(this.state.id);
+        if (this.state.id == -1)  {
             return;
         } else {
             MenuService.getMenuById(this.state.id).then((res) => {
@@ -55,7 +56,7 @@ class CreateMenuComponent extends Component {
     saveMenu  = (e) => {
         e.preventDefault();
         let menu = {categoryName:this.state.categoryName, itemName: this.state.itemName, price: this.state.price};
-        if (this.state.id === -1) {
+        if (this.state.id == -1) {
             MenuService.createMenu(menu).then(res => {
                 this.props.navigate('/')
             })
@@ -73,7 +74,7 @@ class CreateMenuComponent extends Component {
     }
 
     setPageTitle() {
-        if (this.state.id === -1) {
+        if (this.state.id == -1) {
             return <h3 className='text-center'> Add Menu</h3>
         } else {
             return <h3 className='text-center'> Update Menu</h3>
@@ -99,9 +100,9 @@ class CreateMenuComponent extends Component {
                                         <p className="error"> {this.state.errorMessage} </p>
                                     )}
                                     <div className='form-group'>
-                                        <label>Category Name  :</label>
+                                        <label>Category Name :</label>
                                         {
-                                            this.state.id === -1
+                                            this.state.id == -1
                                             ? <input placeholder='Category Name' name="categoryName" className='form-control'
                                                 value={this.state.categoryName} onChange={this.changeCategoryHandler} />
                                             : <input placeholder='Category Name' name="categoryName" className='form-control'
@@ -109,9 +110,9 @@ class CreateMenuComponent extends Component {
                                         }
                                     </div>
                                     <div className='form-group'>
-                                        <label>Item Name  :</label>
+                                        <label>Item Name :</label>
                                         {
-                                            this.state.id === -1
+                                            this.state.id == -1
                                             ?
                                             <input placeholder='Item Name' name="itemName" className='form-control'
                                                 value={this.state.itemName} onChange={this.changeItemHandler}/>  
