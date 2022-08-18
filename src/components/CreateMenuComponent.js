@@ -22,7 +22,6 @@ class CreateMenuComponent extends Component {
     }
 
     componentDidMount() {
-        console.log(this.state.id);
         if (this.state.id == -1)  {
             return;
         } else {
@@ -100,29 +99,29 @@ class CreateMenuComponent extends Component {
                                         <p className="error"> {this.state.errorMessage} </p>
                                     )}
                                     <div className='form-group'>
-                                        <label>Category Name :</label>
+                                        <label htmlFor="categoryName">Category Name :</label>
                                         {
                                             this.state.id == -1
-                                            ? <input placeholder='Category Name' name="categoryName" className='form-control'
+                                            ? <input placeholder='Category Name' id="categoryName" name="categoryName" className='form-control'
                                                 value={this.state.categoryName} onChange={this.changeCategoryHandler} />
-                                            : <input placeholder='Category Name' name="categoryName" className='form-control'
+                                            : <input placeholder='Category Name' id="categoryName" name="categoryName" className='form-control'
                                             value={this.state.categoryName} onChange={this.changeCategoryHandler} readOnly/>
                                         }
                                     </div>
                                     <div className='form-group'>
-                                        <label>Item Name :</label>
+                                        <label htmlFor="itemName" >Item Name :</label>
                                         {
                                             this.state.id == -1
                                             ?
-                                            <input placeholder='Item Name' name="itemName" className='form-control'
+                                            <input placeholder='Item Name' id="itemName" name="itemName" className='form-control'
                                                 value={this.state.itemName} onChange={this.changeItemHandler}/>  
-                                            : <input placeholder='Item Name' name="itemName" className='form-control'
+                                            : <input placeholder='Item Name' id="itemName" name="itemName" className='form-control'
                                                 value={this.state.itemName} onChange={this.changeItemHandler} readOnly/>
                                         }  
                                     </div>
                                     <div className='form-group'>
-                                        <label>Price :</label>
-                                        <input placeholder='Price' name="price" className='form-control'
+                                        <label htmlFor="price">Price :</label>
+                                        <input placeholder='Price' id="price" name="price" className='form-control'
                                             value={this.state.price} onChange={this.changePriceHandler}/>    
                                     </div>
                                     <div className='form-group'>
