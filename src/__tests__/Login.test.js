@@ -25,7 +25,7 @@ test('navigation to login page', async () => {
 });
 
 
-test('successfully login in to application', async () => {
+test('failed login in to application', async () => {
   axiosMock.post.mockRejectedValueOnce({response: {data: {username:'Invalid username',password:'InvalidPassword'}}});
   await waitFor(() => {
     render(<App />);
@@ -36,4 +36,25 @@ test('successfully login in to application', async () => {
     const btnLogin = screen.getByTestId("appLogin");
     fireEvent.click(btnLogin);
   });
+});
+
+test('successful login in to application', async () => {
+  axiosMock.post.mockResolvedValue({data: {username:'mock user',authToken:'mockAuth'}});
+  axiosMock.get.mockResolvedValue({data: [{ id:1,categoryName:'Breakfast',itemName:'Idly',price:50 },] })
+  await waitFor(() => {
+    render(<App />);
+    
+  });
+
+  delete window.location;
+  window.location = Object.create(window);
+  window.location.reload = jest.fn();
+
+  await  act(async () => {
+    const btnLogin = screen.getByTestId("appLogin");
+    fireEvent.click(btnLogin);
+  });
+  expect(screen.getByText('Add Menu')).toBeTruthy();
+  expect(screen.getByText('Update')).toBeTruthy();
+  expect(screen.getByText('Delete')).toBeTruthy();
 });
