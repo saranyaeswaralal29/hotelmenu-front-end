@@ -101,7 +101,7 @@ class ListMenuComponent extends Component {
         return (
             <div>
                 <h2 className="text-center">Menu List</h2>
-                <h2>Welcome 
+                <h2>Welcome&nbsp;
                 {
                     localStorage.getItem('username') !== null 
                     ? localStorage.getItem('username')

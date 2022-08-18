@@ -9,7 +9,6 @@ const url = 'http://localhost:8080';
 
 test('renders default view in screen', async () => {
   axiosMock.get.mockResolvedValue({data: { id:1,categoryName:'Breakfast',itemName:'Idly',price:50 } })
-  
   await waitFor(() => {
     render(<App />);
   });

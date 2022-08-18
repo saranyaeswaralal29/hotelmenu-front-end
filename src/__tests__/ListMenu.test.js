@@ -1,6 +1,7 @@
 import { render, screen,cleanup,waitFor,fireEvent } from '@testing-library/react';
 import App from '../App';
 import axiosMock from "axios";
+import { act } from 'react-dom/test-utils';
 
 
 jest.mock('axios');
@@ -8,16 +9,17 @@ afterEach(cleanup);
 const url = 'http://localhost:8080';
 
 test('message to be displayed when no menu found', async () => {
-    axiosMock.get.mockResolvedValue({data: { errorMessage: 'No Menu Exists' } })
+    axiosMock.get.mockRejectedValueOnce({response: {data: { errorMessage: 'No Menu Exists' } }});
 
-    await waitFor(() => {
+    await act(() => {
         render(<App />);
     });
+
     expect(screen.findAllByText("No Menu Exists")).toBeTruthy();
 });
 
 test('get all menus from the system', async () => { 
-    axiosMock.get.mockResolvedValue({data: { id:1,categoryName:'Breakfast',itemName:'Idly',price:50 } })
+    axiosMock.get.mockResolvedValue({data: { id:1,categoryName:'Breakfast',itemName:'Idly',price:50 } });
   
     await waitFor(() => {
       render(<App />);
@@ -25,18 +27,19 @@ test('get all menus from the system', async () => {
   
     expect(axiosMock.get).toHaveBeenCalledTimes(1);
     expect(axiosMock.get).toHaveBeenCalledWith(url);
+    expect(screen.getByPlaceholderText('Search By Category')).toBeInTheDocument();
 });
 
-test('add items to cart and navigate to order page', async () => {
-    axiosMock.get.mockResolvedValue({data:{ id:1,categoryName:'Breakfast',itemName:'Idly',price:50 }})
+test('add items to cart and navigate to order page', async () => {    
+    axiosMock.get.mockResolvedValue({data:[ { id:1,categoryName:'Breakfast',itemName:'Idly',price:50 },] });  
     await waitFor(() => {
         render( <App />);
-        console.log(screen);
     });
+    //const btnAddMenu = screen.getByText('Add Menu');
 });
 
 test('when no items added to cart and click on view cart, display message', async () => {
-    axiosMock.get.mockResolvedValue({data:[ { id:1,categoryName:'Breakfast',itemName:'Idly',price:50 },{ id:2,categoryName:'Breakfast',itemName:'Dosa',price:50 }]})
+    axiosMock.get.mockResolvedValue({data:[ { id:1,categoryName:'Breakfast',itemName:'Idly',price:50 },{ id:2,categoryName:'Breakfast',itemName:'Dosa',price:50 }]});
     await waitFor(() => {
         render( <App />);
     });

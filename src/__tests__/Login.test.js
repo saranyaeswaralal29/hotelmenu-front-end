@@ -1,6 +1,7 @@
 import { render, screen,cleanup,waitFor,fireEvent} from '@testing-library/react';
 import App from '../App';
 import axiosMock from "axios";
+import { act } from 'react-dom/test-utils';
 
 jest.mock('axios');
 afterEach(cleanup);
@@ -25,9 +26,13 @@ test('navigation to login page', async () => {
 
 
 test('successfully login in to application', async () => {
-  axiosMock.post.mockResolvedValue({data: {authToken:'mockauth',username:'mockuser'}})
+  axiosMock.post.mockRejectedValueOnce({response: {data: {username:'Invalid username',password:'InvalidPassword'}}});
   await waitFor(() => {
     render(<App />);
+    
+  });
+
+  await  act(async () => {
     const btnLogin = screen.getByTestId("appLogin");
     fireEvent.click(btnLogin);
   });

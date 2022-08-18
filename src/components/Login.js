@@ -2,7 +2,6 @@ import React, { Component}  from 'react';
 import {WithRouter} from '../components/WithRouter';
 import LoginService from '../services/LoginService';
 
-
 class Login extends Component {
    
     constructor(props) {
@@ -33,14 +32,13 @@ class Login extends Component {
         let loginCredentials = {username:this.state.userName, password: this.state.password};
         console.log("login credentials =>"  + JSON.stringify(loginCredentials));
         LoginService.loginApi(loginCredentials).then(res => {
-            // set the token and user from the session storage
-            localStorage.setItem('authToken', res.data.accessToken);
-            localStorage.setItem('username', res.data.username);
-            this.props.navigate('/')
-            window.location.reload();
+        // set the token and user from the session storage
+        localStorage.setItem('authToken', res.data.accessToken);
+        localStorage.setItem('username', res.data.username);
+        this.props.navigate('/')
+        window.location.reload();
         })
         .catch(error => {
-            console.log(error.response.data);
             let messages = [];
             messages = error.response.data;
             if(messages.username  !== undefined && messages.password !== undefined) {
