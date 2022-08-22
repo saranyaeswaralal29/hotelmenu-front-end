@@ -8,6 +8,10 @@ class MenuService {
         return axios.get(MENU_API_BASE_URL);
     }
 
+    getMenusForCategory(name) {
+        return axios.get(MENU_API_BASE_URL,{ params: { categoryName: name } });
+    }
+
     createMenu(menu) {
         let authHeader = axios.create({
             headers: {
@@ -58,6 +62,10 @@ class MenuService {
             }
         });
         return authHeader.delete(MENU_API_BASE_URL+'/admin/'+menuId);
+    }
+
+    getCategories() {
+        return axios.get(MENU_API_BASE_URL+'/category');
     }
 }
 

@@ -11,6 +11,7 @@ describe('Menu actions tests', () => {
     });
 
     test('navigation to add menu page and save', async () => {
+        MenuService.getCategories = jest.fn().mockResolvedValue({data:['Breakfast']});
         MenuService.getMenus = jest.fn().mockResolvedValue({data: [{ id:1,categoryName:'Breakfast',itemName:'Idly',price:50 } ,]});
         LoginService.loginApi = jest.fn().mockResolvedValueOnce({data: {username:'mock user',authToken:'mockAuth'}});
         MenuService.createMenu = jest.fn().mockResolvedValueOnce({data: {id:1,categoryName:'Breakfast',itemName:'Poori',price:80}});

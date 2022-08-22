@@ -7,6 +7,7 @@ describe('Default view tests', () => {
 
   test('renders default view in screen', async () => {
     MenuService.getMenus = jest.fn().mockResolvedValue({data: { id:1,categoryName:'Breakfast',itemName:'Idly',price:50 } });
+    MenuService.getCategories = jest.fn().mockResolvedValue({data:['Breakfast']});
     await waitFor(() => {
       render(<App />);
     });

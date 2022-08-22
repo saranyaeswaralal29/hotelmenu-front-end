@@ -10,8 +10,9 @@ class ListMenuComponent extends Component {
             menus : [],
             searchMenus : [],
             errorMessage: '',
-            searchText:'',
-            selectedItemMap: new Map()
+            selectedItemMap: new Map(),
+            category: '',
+            catogories: []
         }
         this.addMenu = this.addMenu.bind(this);
         this.editMenu = this.editMenu.bind(this);
@@ -29,22 +30,32 @@ class ListMenuComponent extends Component {
         .catch(error => {
             this.setState({errorMessage:error.response.data.errorMessage});
         });
+        MenuService.getCategories().then((res => {
+            this.setState({catogories : res.data});
+        }))
+        .catch(error => {
+            this.setState({errorMessage:error.response.data.errorMessage});
+        });
     }
 
     changeSearchHandler = (event) => {
-        this.setState({searchText: event.target.value});
-        if (event.target.value.length > 0) {
+        this.setState({category: event.target.value});
+        if (event.target.value == 'All') {
             MenuService.getMenus().then((res => {
-                this.setState({searchMenus : res.data});
-                this.setState({menus:this.state.searchMenus.filter(
-                    matchMenu => 
-                        matchMenu.categoryName === this.state.searchText)
-                });
-                this.setState({errorMessage:''});
-            })
+                    this.setState({menus:res.data});
+                    this.setState({errorMessage:''});
+            }))
             .catch(error => {
                 this.setState({errorMessage:error.response.data.errorMessage});
-            }));
+            });
+        } else {
+            MenuService.getMenusForCategory(event.target.value).then((res => {
+                this.setState({menus:res.data});
+                this.setState({errorMessage:''});
+            }))
+            .catch(error => {
+                this.setState({errorMessage:error.response.data.errorMessage});
+            });
         }
     }
 
@@ -113,8 +124,18 @@ class ListMenuComponent extends Component {
                         <button className="btn btn-primary" onClick={this.addMenu}>Add Menu</button>
                     }
                     <p></p>
-                    <input type="text" placeholder='Search By Category' className='float-right'
-                                                value={this.state.searchText} onChange={this.changeSearchHandler}/>
+                    <select
+                        className="dropdown"
+                        name="category"
+                        value={this.state.category}
+                        onChange={this.changeSearchHandler}>
+                        <option key={'All'} value={'All'}>All</option>
+                        {this.state.catogories.map(ctgy => (
+                        <option key={ctgy} value={ctgy}>
+                            {ctgy}
+                        </option>
+                        ))}
+                    </select>
                 </div>
                 <div className="row" style={{overflow: 'auto'}}>
                     {this.state.errorMessage && (
