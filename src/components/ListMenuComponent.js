@@ -111,7 +111,7 @@ class ListMenuComponent extends Component {
     render() {
         return (
             <div>
-                <h2 className="text-center">Menu List</h2>
+                <h2 className="text-center">Menus</h2>
                 <h2>Welcome&nbsp;
                 {
                     localStorage.getItem('username') !== null 
@@ -124,6 +124,7 @@ class ListMenuComponent extends Component {
                         <button className="btn btn-primary" onClick={this.addMenu}>Add Menu</button>
                     }
                     <p></p>
+                    Search Item By Category :
                     <select
                         className="dropdown"
                         name="category"
