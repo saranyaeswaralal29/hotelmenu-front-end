@@ -69,14 +69,14 @@ class OrderDetailsComponent extends Component {
             finalItems.push(menu);
         });
         console.log(finalItems);
-        let orderDetails = {user:{firstName: this.state.firstName,lastName:this.state.lastName,email:this.state.emailId},
-        price: finalPrice, items: finalItems,  status:"new"};
+        let orderDetails = {firstName: this.state.firstName,lastName:this.state.lastName,email:this.state.emailId,
+            order:[{price: finalPrice, items: finalItems,  status:"new"}]};
         console.log(orderDetails);
 
         OrderService.createOrder(orderDetails)
         .then((res => {
             console.log(res.data);
-            alert("Thank you. Your order (Id:"+res.data.id+") will be delivered soon.");
+            alert("Thank you. Your order (Id:"+res.data.order[0].id+") will be delivered soon.");
             this.props.navigate('/');
         }))
         .catch(error  => {

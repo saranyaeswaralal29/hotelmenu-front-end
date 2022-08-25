@@ -1,6 +1,7 @@
 version: 2.1
 orbs:
   node: circleci/node@5.0.2
+  heroku: circleci/heroku@1.2.6
 jobs:
   build-and-test:
     docker:
@@ -12,7 +13,18 @@ jobs:
       - node/install-packages
       - run:
           command: npm run test
+  heroku/deploy-via-git:
+          filters:
+            branches:
+              only:
+                - main
 workflows:
   build-and-test:
     jobs:
       - build-and-test
+  heroku/deploy-via-git:
+    jobs:
+      - heroku/deploy-via-git
+        requires:
+            - build-and-test
+  
