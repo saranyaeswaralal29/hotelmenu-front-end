@@ -5,11 +5,11 @@ const MENU_API_BASE_URL = "http://localhost:8080";
 class MenuService {
 
     getMenus() {
-        return axios.get("/");
+        return axios.get("/menu");
     }
 
     getMenusForCategory(name) {
-        return axios.get("/",{ params: { categoryName: name } });
+        return axios.get("/menu",{ params: { categoryName: name } });
     }
 
     createMenu(menu) {
@@ -22,7 +22,7 @@ class MenuService {
                 Authorization: `Bearer ${localStorage.getItem("authToken")}`
             }
         });
-        return authHeader.post(MENU_API_BASE_URL+'/admin', menu);
+        return authHeader.post('/admin', menu);
     }
 
     getMenuById(menuId) {
@@ -35,7 +35,7 @@ class MenuService {
                 Authorization: `Bearer ${localStorage.getItem("authToken")}`
             }
         });
-       return authHeader.get(MENU_API_BASE_URL+'/'+menuId);
+       return authHeader.get('/menu/'+menuId);
     }
 
     updateMenu(menuId, menu) {
@@ -48,7 +48,7 @@ class MenuService {
                 Authorization: `Bearer ${localStorage.getItem("authToken")}`
             }
         });
-        return authHeader.put(MENU_API_BASE_URL+'/admin/'+menuId,menu);
+        return authHeader.put('/admin/'+menuId,menu);
     }
 
     deleteMenu(menuId) {
@@ -61,11 +61,11 @@ class MenuService {
                 Authorization: `Bearer ${localStorage.getItem("authToken")}`
             }
         });
-        return authHeader.delete(MENU_API_BASE_URL+'/admin/'+menuId);
+        return authHeader.delete('/admin/'+menuId);
     }
 
     getCategories() {
-        return axios.get(MENU_API_BASE_URL+'/category');
+        return axios.get('/category');
     }
 }
 

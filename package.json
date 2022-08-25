@@ -42,5 +42,6 @@
   "devDependencies": {
     "msw": "^0.44.2"
   },
+  //"proxy": "http://localhost:8080/"
   "proxy": "https://menustage.herokuapp.com/"
 }
