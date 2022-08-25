@@ -10,7 +10,7 @@ class MenuService {
     }
 
     getMenusForCategory(name) {
-        return axios.get("/menu",{ params: { categoryName: name } });
+        return axios.get(process.env.REACT_APP_SERVER_API_URL+"/menu",{ params: { categoryName: name } });
     }
 
     createMenu(menu) {
@@ -23,7 +23,7 @@ class MenuService {
                 Authorization: `Bearer ${localStorage.getItem("authToken")}`
             }
         });
-        return authHeader.post('/admin', menu);
+        return authHeader.post(process.env.REACT_APP_SERVER_API_URL+'/admin', menu);
     }
 
     getMenuById(menuId) {
@@ -36,7 +36,7 @@ class MenuService {
                 Authorization: `Bearer ${localStorage.getItem("authToken")}`
             }
         });
-       return authHeader.get('/menu/'+menuId);
+       return authHeader.get(process.env.REACT_APP_SERVER_API_URL+'/menu/'+menuId);
     }
 
     updateMenu(menuId, menu) {
@@ -49,7 +49,7 @@ class MenuService {
                 Authorization: `Bearer ${localStorage.getItem("authToken")}`
             }
         });
-        return authHeader.put('/admin/'+menuId,menu);
+        return authHeader.put(process.env.REACT_APP_SERVER_API_URL+'/admin/'+menuId,menu);
     }
 
     deleteMenu(menuId) {
@@ -62,11 +62,11 @@ class MenuService {
                 Authorization: `Bearer ${localStorage.getItem("authToken")}`
             }
         });
-        return authHeader.delete('/admin/'+menuId);
+        return authHeader.delete(process.env.REACT_APP_SERVER_API_URL+'/admin/'+menuId);
     }
 
     getCategories() {
-        return axios.get('/category');
+        return axios.get(process.env.REACT_APP_SERVER_API_URL+'/category');
     }
 }
 
