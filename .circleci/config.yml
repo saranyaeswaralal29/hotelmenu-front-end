@@ -18,6 +18,8 @@ jobs:
             branches:
               only:
                 - main
+          requires:
+            - build-and-test
 workflows:
   build-and-test:
     jobs:
@@ -25,6 +27,3 @@ workflows:
   heroku/deploy-via-git:
     jobs:
       - heroku/deploy-via-git
-        requires:
-            - build-and-test
-  
