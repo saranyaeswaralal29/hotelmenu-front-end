@@ -5,7 +5,8 @@ const MENU_API_BASE_URL = "http://localhost:8080";
 class MenuService {
 
     getMenus() {
-        return axios.get("/menu");
+        console.log(process.env.REACT_APP_SERVER_API_URL);
+        return axios.get(process.env.REACT_APP_SERVER_API_URL+"/menu");
     }
 
     getMenusForCategory(name) {
