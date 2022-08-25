@@ -5,11 +5,11 @@ const MENU_API_BASE_URL = "http://localhost:8080";
 class MenuService {
 
     getMenus() {
-        return axios.get(MENU_API_BASE_URL);
+        return axios.get("/");
     }
 
     getMenusForCategory(name) {
-        return axios.get(MENU_API_BASE_URL,{ params: { categoryName: name } });
+        return axios.get("/",{ params: { categoryName: name } });
     }
 
     createMenu(menu) {
