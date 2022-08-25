@@ -5,12 +5,25 @@ const MENU_API_BASE_URL = "http://localhost:8080";
 class MenuService {
 
     getMenus() {
-        console.log(process.env.REACT_APP_SERVER_API_URL);
-        return axios.get(process.env.REACT_APP_SERVER_API_URL+"/menu");
+        let authHeader = axios.create({
+            headers: {
+                Accept: '*/*',
+                "Access-Control-Allow-Origin": "*",
+                "Content-Type": "application/json"
+            }
+        });
+        return authHeader.get(process.env.REACT_APP_SERVER_API_URL+"/menu");
     }
 
     getMenusForCategory(name) {
-        return axios.get(process.env.REACT_APP_SERVER_API_URL+"/menu",{ params: { categoryName: name } });
+        let authHeader = axios.create({
+            headers: {
+                Accept: '*/*',
+                "Access-Control-Allow-Origin": "*",
+                "Content-Type": "application/json"
+            }
+        });
+        return authHeader.get(process.env.REACT_APP_SERVER_API_URL+"/menu",{ params: { categoryName: name } });
     }
 
     createMenu(menu) {
