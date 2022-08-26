@@ -32,7 +32,7 @@ class MenuService {
                 Accept: '*/*',
                 "Access-Control-Allow-Origin": "*",
                 "Content-Type": "application/json",
-                withCredentials: true,
+                //withCredentials: true,
                 Authorization: `Bearer ${localStorage.getItem("authToken")}`
             }
         });
@@ -45,7 +45,7 @@ class MenuService {
                 Accept: '*/*',
                 "Access-Control-Allow-Origin": "*",
                 "Content-Type": "application/x-www-form-urlencoded",
-                withCredentials: true,
+                //withCredentials: true,
                 Authorization: `Bearer ${localStorage.getItem("authToken")}`
             }
         });
@@ -58,7 +58,7 @@ class MenuService {
                 Accept: '*/*',
                 "Access-Control-Allow-Origin": "*",
                 "Content-Type": "application/json",
-                withCredentials: true,
+                //withCredentials: true,
                 Authorization: `Bearer ${localStorage.getItem("authToken")}`
             }
         });
@@ -71,7 +71,7 @@ class MenuService {
                 Accept: '*/*',
                 "Access-Control-Allow-Origin": "*",
                 "Content-Type": "application/json",
-                withCredentials: true,
+                //withCredentials: true,
                 Authorization: `Bearer ${localStorage.getItem("authToken")}`
             }
         });
