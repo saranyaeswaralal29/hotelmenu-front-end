@@ -76,7 +76,7 @@ class OrderDetailsComponent extends Component {
         OrderService.createOrder(orderDetails)
         .then((res => {
             console.log(res.data);
-            alert("Thank you. Your order (Id:"+res.data.order[0].id+") will be delivered soon.");
+            alert("Thank you. Your order (Id:"+res.data.id+") will be delivered soon.");
             this.props.navigate('/');
         }))
         .catch(error  => {
