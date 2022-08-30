@@ -11,6 +11,5 @@ workflows:
             branches:
               only:
                 - main
-            - command: npm run build:staging
           requires:
             - node/test
