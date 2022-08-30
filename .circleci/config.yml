@@ -12,7 +12,6 @@ workflows:
               only:
                 - main
           post-steps:
-            - run:
-              command: npm run build:staging
+            - run: npm run build:staging
           requires:
             - node/test
