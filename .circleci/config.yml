@@ -36,6 +36,7 @@ jobs:
       - run:
           command: npm run build:staging
       - heroku/deploy-via-git
+        requires: build-and-test
 workflows:
   build-and-test:
     jobs:
@@ -43,4 +44,3 @@ workflows:
   heroku_deploy:
     jobs:
       - deploy
-        requires: build-and-test
