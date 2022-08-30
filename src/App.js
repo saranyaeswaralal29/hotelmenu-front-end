@@ -6,11 +6,13 @@ import FooterComponent from './components/FooterComponent';
 import CreateMenuComponent from './components/CreateMenuComponent';
 import Login from './components/Login';
 import OrderDetailsComponent from './components/OrderDetailsComponent';
+import LoginPage from './pages/LoginPage';
 
 function App() {
   return (
     <div>
-      <Router>
+      <LoginPage/>
+      {/* <Router>
         <HeaderComponent/>
           <div className="container">
             <Routes> 
@@ -21,7 +23,7 @@ function App() {
             </Routes>
           </div>
           <FooterComponent/>  
-      </Router>
+      </Router> */}
     </div>
   );
 }
