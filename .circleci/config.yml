@@ -24,7 +24,7 @@ jobs:
     steps:
       - attach_workspace:
           at: ~/project
-      - heroku/deploy-via-git
+      - heroku/deploy-via-git:
           force: true
 workflows:
   build_test_deploy:
