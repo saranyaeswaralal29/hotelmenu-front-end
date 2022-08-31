@@ -25,11 +25,7 @@ jobs:
       - attach_workspace:
           at: ~/project
       - heroku/deploy-via-git
-          requires:
-              - build_and_test
-              filters:
-              branches:
-                  only: main
+          force: true
 workflows:
   build_test_deploy:
     jobs:
