@@ -2,14 +2,36 @@ version: 2.1
 orbs:
   node: circleci/node@5.0.2
   heroku: circleci/heroku@1.2.6
-workflows:
-  test-and-deploy:
-    jobs:
-      - node/test
+jobs:
+  build_and_test: 
+    executor: node/default 
+    steps:
+      - checkout
+      - node/install-packages:
+          pkg-manager: npm
+      - run:
+          command: npm run test
+          name: Run tests
+      - run:
+          command: npm run build:staging
+          name: Build app
+      - persist_to_workspace:
+          root: ~/project
+          paths:
+            - .
+  deploy: 
+    executor: heroku/default
+    steps:
+      - attach_workspace:
+          at: ~/project
       - heroku/deploy-via-git:
+workflows:
+  build_test_deploy:
+    jobs:
+      - build_and_test
+      - deploy:
+          requires:
+            - build_and_test 
           filters:
             branches:
-              only:
-                - main
-          requires:
-            - node/test
+              only: main
