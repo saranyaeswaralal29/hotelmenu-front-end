@@ -6,10 +6,16 @@ workflows:
   test-and-deploy:
     jobs:
       - node/test
+      - build
+          steps:
+            - run:
+                command: npm run build:staging
+          requires:
+            - node/test
       - heroku/deploy-via-git:
           filters:
             branches:
               only:
                 - main
           requires:
-            - node/test
+            - build
