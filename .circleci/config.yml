@@ -13,7 +13,7 @@ jobs:
           command: npm run test
           name: Run tests
       - run:
-          command: npm run build:staging
+          command: CI=false npm run build:staging
           name: Build app
       - persist_to_workspace:
           root: ~/project
