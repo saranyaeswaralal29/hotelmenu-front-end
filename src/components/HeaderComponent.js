@@ -29,6 +29,8 @@ class HeaderComponent extends Component {
                                 ? <NavLink to="/login" className="btn btn-info">Login</NavLink>
                                 : <NavLink to="/" onClick={this.logoutHandle} className="btn btn-info">Log out</NavLink>
                             }
+                            &nbsp;
+                            <NavLink to="/orders" className="btn btn-info">Orders</NavLink>
                         </div>
                     </nav>
                 </header>

@@ -6,6 +6,7 @@ import FooterComponent from './components/FooterComponent';
 import CreateMenuComponent from './components/CreateMenuComponent';
 import Login from './components/Login';
 import OrderDetailsComponent from './components/OrderDetailsComponent';
+import ListOrderComponent from './components/ListOrderComponent';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
               <Route path="/add/:id" element = {<CreateMenuComponent/>}></Route>
               <Route path='/login' exact element= {<Login/>}></Route>
               <Route path='/previewOrder' element={<OrderDetailsComponent/>}></Route>
+              <Route path='/orders' element={<ListOrderComponent/>}></Route>
             </Routes>
           </div>
           <FooterComponent/>  
